@@ -9,6 +9,7 @@ class CreateUserForm(UserCreationForm):
         model = User
         fields = ['username','email','password1','password2']
 
+    #sprawdzanie, czy email się nie powtarza 
     def clean_email(self):
         email = self.cleaned_data.get("email")
         qs = User.objects.filter(email =email)
