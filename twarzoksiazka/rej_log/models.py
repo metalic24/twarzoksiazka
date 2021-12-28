@@ -2,46 +2,28 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
+from django.contrib.auth.models import User
+from django.db.models.deletion import CASCADE
+from django.db.models.fields import BooleanField, CharField, DateField
+from django.db.models.fields.files import ImageField
+from django.db.models.fields.related import ForeignKey, OneToOneField
 
 
 
-class UserProfileManager(BaseUserManager):
-    """ Manager for user profiles """
-    def create_user(self, email, name, password=None):
-        """ Create a new user profile """
-        if not email:
-            raise ValueError('User must have an email address')
 
-        email = self.normalize_email(email)
-        user = self.model(email=email, name=name)
+class User_details(models.Model):
+    user = OneToOneField(User, on_delete=CASCADE)
+    profile_img = ImageField(upload_to='profile_pic/', null=True, blank = True)
+    bio = models.TextField(blank=True, null=True)
+    birth_date = DateField()
+    name = CharField(max_length=50, null=False)
+    surr_name = CharField(max_length=50, null=False)
 
-        user.set_password(password)
-        user.save(using=self._db)
-
-        return user
-
-    def create_superuser(self, email, name, password):
-        """ Create a new superuser profile """
-        user = self.create_user(email,name, password)
-        user.is_superuser = True
-        user.is_staff = True
-
-        user.save(using=self._db)
+    def save(self, commit=True):
+        user = super().save(False)
+        user.username = user.email 
+        user = super().save()
 
         return user
+    
 
-        
-class UserProfile(AbstractBaseUser, PermissionsMixin):
-    """ Database model for users in the system """
-    email = models.EmailField(max_length=255, unique=True)
-    name = models.CharField(max_length=255)
-    is_staff = models.BooleanField(default=False)
-
-    objects = UserProfileManager()
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name']
-
-    def __str__(self):
-        """ Return string representation of our user """
-        return self.email

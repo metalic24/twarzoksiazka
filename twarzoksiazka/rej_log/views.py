@@ -1,16 +1,36 @@
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.shortcuts import redirect, render
-from .forms import CreateUserForm
+from .forms import  CreateUserDetailsForm, CreateUserForm
+from .models import User_details, User
+from django.contrib.auth.hashers import make_password
+
 
 def register(request):
-    form = CreateUserForm(request.POST)
-    if form.is_valid():
-        email = form.cleaned_data.get("email")
-        form.save()
+    form1 = CreateUserForm(request.POST)
+    form2 = CreateUserDetailsForm(request.POST)
+   
 
+
+   
+    if form1.is_valid():
+
+        email = form1.cleaned_data.get("email")
+        user=  User(username = request.POST['email'], email = request.POST['email'], password = make_password( request.POST['password1'] ))
+        user.save()
+
+       
+
+
+
+
+        
+       
     context={
-        'form':form
+        'form1':form1,
+        'form2':form2
+      
+
     }
 
     return render(request,"register.html",context)
