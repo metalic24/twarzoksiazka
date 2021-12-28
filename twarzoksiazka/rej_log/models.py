@@ -19,11 +19,5 @@ class User_details(models.Model):
     name = CharField(max_length=50, null=False)
     surr_name = CharField(max_length=50, null=False)
 
-    def save(self, commit=True):
-        user = super().save(False)
-        user.username = user.email 
-        user = super().save()
-
-        return user
     
 

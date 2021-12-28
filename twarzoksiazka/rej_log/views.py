@@ -11,14 +11,21 @@ def register(request):
     form2 = CreateUserDetailsForm(request.POST)
    
 
-
+    print(request.POST)
    
-    if form1.is_valid():
+    if form1.is_valid() and form2.is_valid():
 
         email = form1.cleaned_data.get("email")
         user=  User(username = request.POST['email'], email = request.POST['email'], password = make_password( request.POST['password1'] ))
         user.save()
 
+        birth_date = request.POST['birth_date_year'] +'-' + request.POST['birth_date_month'] +'-'  + request.POST['birth_date_day']
+        
+        user_details = User_details(user = user, name = request.POST['name'], surr_name = request.POST['surr_name'],
+        birth_date = birth_date , bio = request.POST['bio'] ,profile_img = request.POST['profile_img']
+        )
+
+        user_details.save()
        
 
 

@@ -1,11 +1,12 @@
 
-from django.forms.widgets import DateInput
+from django.forms.widgets import DateInput, SelectDateWidget
 from .models import  User_details
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 from django import forms
 from django.forms import fields
+
 
 
 class CreateUserForm(UserCreationForm):
@@ -22,13 +23,14 @@ class CreateUserForm(UserCreationForm):
         return email
 
     
+YEARS= [x for x in range(1940,2023)]
 
 class CreateUserDetailsForm(forms.ModelForm):
     class Meta:
         model = User_details
         fields = ['name', 'surr_name', 'birth_date', 'bio' , 'profile_img']
         widgets = {
-            'birth_date': DateInput(),
+            'birth_date': SelectDateWidget(years=YEARS)
         }
         
 

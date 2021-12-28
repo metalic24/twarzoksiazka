@@ -3,12 +3,12 @@
 {%block content%}
 
 <form method="post">{% csrf_token %}
-
+ 
    {{ form1.as_p}}
    {{ form2.as_p}}
 
    <input type="submit" value="rejestracja ">
 
 
-   {{form.errors}}
+   {{form1.errors}}
 {% endblock %}
