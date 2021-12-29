@@ -32,5 +32,11 @@ class CreateUserDetailsForm(forms.ModelForm):
         widgets = {
             'birth_date': SelectDateWidget(years=YEARS)
         }
+
+
+class UpdateUserDetailsForm(forms.ModelForm):
+   class Meta:
+        model = User_details
+        fields = ['name', 'surr_name', 'profile_img', 'bio'] 
         
 

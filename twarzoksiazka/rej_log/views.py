@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.shortcuts import redirect, render
-from .forms import  CreateUserDetailsForm, CreateUserForm
+from .forms import  CreateUserDetailsForm, CreateUserForm, UpdateUserDetailsForm, User_details
 from .models import User_details, User
 from django.contrib.auth.hashers import make_password
 
@@ -89,6 +89,27 @@ def hello_login(request):
 
 
     return render(request,"hello.html",context )
+
+def update_user_details(request):
+    obj = User_details.objects.get(user = request.user)
+    form = UpdateUserDetailsForm( request.POST or None, request.FILES or None ,instance=obj )
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            user = User.objects.get(id = request.user.id)
+            user.first_name = request.POST['name']
+            user.last_name = request.POST['surr_name']
+            user.save()
+
+    context={
+
+        'obj':obj,
+        'form':form
+    }
+
+    return render(request,"update.html",context )
+
 
 
 

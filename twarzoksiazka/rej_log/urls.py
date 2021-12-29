@@ -6,4 +6,5 @@ urlpatterns = [
     path('hello/',views.hello_login),
 
     path('login/',views.viev_login),
+    path('update/',views.update_user_details),
 ]
