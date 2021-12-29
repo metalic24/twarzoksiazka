@@ -22,7 +22,7 @@ class CreateUserForm(UserCreationForm):
         
         return email
 
-    
+#liczy daty, bo domyślnie jest od bierzącego roku + 10 lat  
 YEARS= [x for x in range(1940,2023)]
 
 class CreateUserDetailsForm(forms.ModelForm):
