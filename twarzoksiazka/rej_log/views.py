@@ -22,7 +22,7 @@ def register(request):
         birth_date = request.POST['birth_date_year'] +'-' + request.POST['birth_date_month'] +'-'  + request.POST['birth_date_day']
         
         user_details = User_details(user = user, name = request.POST['name'], surr_name = request.POST['surr_name'],
-        birth_date = birth_date , bio = request.POST['bio'] ,profile_img = request.POST['profile_img']
+        birth_date = birth_date , bio = request.POST['bio'] 
         )
 
         user_details.save()

@@ -28,7 +28,7 @@ YEARS= [x for x in range(1940,2023)]
 class CreateUserDetailsForm(forms.ModelForm):
     class Meta:
         model = User_details
-        fields = ['name', 'surr_name', 'birth_date', 'bio' , 'profile_img']
+        fields = ['name', 'surr_name', 'birth_date', 'bio']
         widgets = {
             'birth_date': SelectDateWidget(years=YEARS)
         }
