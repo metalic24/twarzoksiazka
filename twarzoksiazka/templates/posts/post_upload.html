@@ -12,6 +12,17 @@
         {% if obj.post_img %}
         <img src={{obj.post_img.url}}>
         {% endif %}
+        <form action='{% url 'posts:like-post-view' %}' method='POST'>{% csrf_token %}
+            <input type='hidden' name='post_id' value={{obj.id}}>
+            <button type='submit' class='w3-btn w3-blue'>
+                {% if profile not in obj.liked.all %}
+                    Like
+                {% else %}
+                    Unlike
+                {% endif %}
+            </button>
+            {{obj.num_likes}}
+        </form>
     </p>
 
     <div>
