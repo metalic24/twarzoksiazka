@@ -11,7 +11,7 @@ def register(request):
     form2 = CreateUserDetailsForm(request.POST)
    
 
-    print(request.POST)
+  
    
     if form1.is_valid() and form2.is_valid():
 
@@ -26,6 +26,15 @@ def register(request):
         )
 
         user_details.save()
+
+        #dodatkowo sobię to dodaję, bo potem to się przyda
+        user.first_name = user_details.name
+        user.last_name = user_details.surr_name
+
+        user.save()
+
+        login(request,user)
+        return redirect(hello_login)
        
 
 
