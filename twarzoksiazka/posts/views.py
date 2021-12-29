@@ -7,22 +7,29 @@ from rej_log.models import User_details
 def post_com_upload(request):
     post_obj = Post.objects.all()
     
-    post_form = PostForm(request.POST or None, request.FILES or None)
-    com_form = CommentForm(request.POST or None)
-    profile = User_details.objects.get(user=request.user)
     
-    if post_form.is_valid():
-        instance = post_form.save(commit=False)
-        instance.author = profile
-        instance.save()
-        post_form = PostForm()
-        
-    if com_form.is_valid():
-        instance = com_form.save(commit=False)
-        instance.user = profile
-        instance.post = Post.objects.get(id=request.POST.get('post_id'))
-        instance.save()
-        com_form = CommentForm()
+    profile = User_details.objects.get(user=request.user) 
+    post_form = PostForm()
+    com_form = CommentForm()
+    
+    
+    if 'submit_post_form' in request.POST:
+        print(request.POST)
+        post_form = PostForm(request.POST, request.FILES)
+        if post_form.is_valid():
+            instance = post_form.save(commit=False)
+            instance.author = profile
+            instance.save()
+            post_form = PostForm()
+    
+    if 'submit_com_form' in request.POST:
+        com_form = CommentForm(request.POST)    
+        if com_form.is_valid():
+            instance = com_form.save(commit=False)
+            instance.user = profile
+            instance.post = Post.objects.get(id=request.POST.get('post_id'))
+            instance.save()
+            com_form = CommentForm()
     
     
     context = {

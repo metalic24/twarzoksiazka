@@ -7,7 +7,12 @@
 
 {% for obj in post_obj %}
 
-    <p>{{obj.content}}</p>
+    <p>
+        {{obj.content}}
+        {% if obj.post_img %}
+        <img src={{obj.post_img.url}}>
+        {% endif %}
+    </p>
 
     <div>
         {% if obj.comment_set.all %}
@@ -21,7 +26,7 @@
     <form action='' method='POST'>{% csrf_token %}
         <input type='hidden' name='post_id' value={{obj.id}}>
         {{com_form}}
-        <input type='submit' value='Comment'>
+        <input type='submit' name='submit_com_form' value='Comment'>
     </form>
 
 
@@ -29,7 +34,7 @@
 
 <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
     {{post_form}}
-    <input type="submit" value="Post">
+    <input type="submit" name='submit_post_form' value="Post">
 </form>
 
 
