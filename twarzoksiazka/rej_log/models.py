@@ -13,7 +13,7 @@ from django.db.models.fields.related import ForeignKey, ManyToManyField, OneToOn
 
 class User_details(models.Model):
     user = OneToOneField(User, on_delete=CASCADE)
-    profile_img = ImageField(upload_to='profile_pic', default='avatar.jpg',null=True, blank = True)
+    profile_img = ImageField(upload_to='profile_pic', default='profile_pic/avatar.jpg',null=True, blank = True)
     bio = models.TextField(blank=True, null=True)
     birth_date = DateField()
     name = CharField(max_length=50, null=False)
@@ -22,7 +22,7 @@ class User_details(models.Model):
 
     def get_friends(self):
         return self.friends.all()
-    def get_friends(self):
+    def get_friends_no(self):
         return self.friends.all().count()
     def __str__(self):
         return f"{self.user.id}--{self.user.username}"

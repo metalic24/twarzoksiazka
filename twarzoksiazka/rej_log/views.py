@@ -77,8 +77,18 @@ def viev_login(request):
 
     return  render(request,"login.html",context)
 
+#user profile viev
 def hello_login(request):
-    return render(request,"hello.html",{} )
+
+    obj = User_details.objects.get(user = request.user)
+    context = {
+        'obj': obj
+    }
+
+
+
+
+    return render(request,"hello.html",context )
 
 
 

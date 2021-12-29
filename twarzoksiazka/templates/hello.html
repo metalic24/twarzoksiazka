@@ -2,8 +2,30 @@
 
 {%block content%}
 
-{% csrf_token %}
-<h1>Hello {{request.user.username}}</h1>
+<ul>
+    <li>
+       <h1>{{obj.name}} {{obj.surr_name}}</h1> 
+       
+    </li>
+    <li>
+        <img src="{{obj.profile_img.url}}" height="100" width="100"/>
+    </li>
+    <li>{{obj.get_friends_no}}</li>
+    <li>
+        <ol>
+        Friends:
+        {% for frend in obj.get_friends %}
+
+        <li>{{frend.first_name}}
+            {{frend.last_name}}
+
+        </li>
+
+        {% endfor %}
+        </ol>
+    </li>
+
+</ul>
 
   
 {% endblock %}
