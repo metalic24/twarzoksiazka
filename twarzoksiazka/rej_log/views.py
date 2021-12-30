@@ -118,7 +118,7 @@ def get_profiles(request):
         query = request.GET.get('query')
         print(query)
         profile_list = User_details.objects.filter(
-            Q(name__icontains = query) 
+            Q(name__icontains = query) | Q(surr_name__icontains = query)
         )
         print("lista",profile_list)
         context = {
