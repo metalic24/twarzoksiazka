@@ -1,9 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'main.html' %}
 
+{% block profile %}{% endblock profile %}
+{% block postkomlike %}{% endblock postkomlike %}
 
-{% block content %}
+{% block posty %}
 
-<h3>Delete Post</h3>
+{% comment %} <h3>Delete Post</h3>
 
 {% if messages %}
 
@@ -22,11 +24,31 @@
     </form>
 
 {% endif %}
+ {% endcomment %}
+<div class="w3-row-padding">
+    <div class="w3-col m12">
+    <div class="w3-card w3-round w3-white">
+        <div class="w3-container w3-padding">
+        <h2 class="w3-opacity">Delete Post?</h2>
+            {% if messages %}
+                {% for message in messages %}
+                    {% if 'warning' in message.tags %}
+                        {{message}}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            <form class='w3-container' action="" method="POST">{% csrf_token %}
+                <button type="submit" class="w3-button w3-theme">Delete</button> 
+            </form>
+        </div>
+    </div>
+    </div>
+</div>
 
 
 
 
-{% endblock content %}
+{% endblock posty %}
 
 
 
