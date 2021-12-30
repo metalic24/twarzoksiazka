@@ -11,7 +11,6 @@ from django.contrib import messages
 def post_com_upload(request):
     post_obj = Post.objects.all()
     
-    
     profile = User_details.objects.get(user=request.user) 
     post_form = PostForm()
     com_form = CommentForm()

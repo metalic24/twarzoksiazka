@@ -1,4 +1,74 @@
-{% extends 'base.html' %}
+{% extends 'main.html' %}
+
+{% block posty %}
+    <div class="w3-row-padding">
+        <div class="w3-col m12">
+        <div class="w3-card w3-round w3-white">
+            <div class="w3-container w3-padding">
+            <h6 class="w3-opacity">Podziel się tym co masz na twarzy!</h6>
+                <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <p>{{post_form.content}}</p>
+                    <button type="submit" name='submit_post_form' class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button> 
+                    <button class='w3-theme'>{{post_form.post_img}}</button>
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock posty %}
+
+
+{% block postkomlike %}
+    {% for obj in post_obj %}
+        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+            <img src="{{obj.author.profile_img.url}}" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+            <span class="w3-right w3-opacity">TO DO czas</span>
+            <h4>{{obj.author.name}}</h4><br>
+            <hr class="w3-clear">
+            <p>{{obj.content}}</p>
+            <div class="w3-row-padding" style="margin:0 -16px">
+                <div class="w3-half w3-margin-bottom">
+                    {% if obj.post_img %}
+                    <img src={{obj.post_img.url}} class='w3-image'>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <form action='{% url 'posts:like-post-view' %}' method='POST'>{% csrf_token %}
+                <input type='hidden' name='post_id' value={{obj.id}}>
+                <button type="submit" class="w3-button w3-theme-d1 w3-margin-bottom">
+                    {% if profile not in obj.liked.all %}
+                        <i class="fa fa-thumbs-up"></i> Like
+                    {% else %}
+                        <i class="fa fa-thumbs-down"></i> Unlike
+                    {% endif %}
+                </button>
+                {{obj.num_likes}}
+            </form>
+
+            {% if obj.comment_set.all %}
+            {% for c in obj.comment_set.all %}
+                <p>{{c.com_body}}</p>
+        
+            {% endfor %}
+            {% endif %}
+
+            <form action='' method='POST'>{% csrf_token %}
+                <input type='hidden' name='post_id' value={{obj.id}}>
+                {{com_form}}
+                <button type="submit" name='submit_com_form' class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button>
+            </form>
+
+            {% ifequal request.user obj.author.user %}
+            <a href="{% url 'posts:update-post' obj.pk %}"><button class="w3-button w3-theme-d1 w3-margin-bottom">Update</button></a>
+            <a href="{% url 'posts:delete-post' obj.pk %}"><button class="w3-button w3-theme-d2 w3-margin-bottom">Delete</button></a>
+            {% endifequal %}
+        </div>
+    {% endfor %}
+{% endblock postkomlike %}
+
+
+{% comment %} {% extends 'base.html' %}
 
 {% block content %}
 
@@ -56,4 +126,5 @@
 </form>
 
 
-{% endblock %}
+{% endblock %} {% endcomment %}
+
