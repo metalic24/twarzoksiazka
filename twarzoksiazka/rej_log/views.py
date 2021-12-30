@@ -134,14 +134,19 @@ def show_infitations(request):
      rels = Relationship.objects.filter(reciver=reciver, status='send')
 
      senders=[]
+    
 
      for rel in rels:
          sender = User_details.objects.get(user = rel.sender.user)
+         
          senders.append(sender)
+         
+         
+     invites = zip(senders,rels)
+    
 
      context ={
-        'rels':rels,
-        'senders':senders
+         'invites':invites
     }
      return render(request, 'invitations.html', context)
 
@@ -169,3 +174,13 @@ def add_friend(request):
 
     return redirect("viev_login")
 
+def accept_invite(request):
+     if request.method == "POST":
+        pk = request.POST.get('invite_pk')
+        invite = Relationship.objects.get(pk=pk)
+
+        invite.status= 'accepted'
+        invite.save()
+     return redirect(hello_login)
+
+    

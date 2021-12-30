@@ -5,7 +5,7 @@
 {% endblock %}
 {% block users %}
 <div class="container">
-    {% for profile in senders %}
+    {% for profile, invite in  invites %}
 
     <div class="container mt-5 d-flex justify-content-center">
         <div class="card p-3">
@@ -19,10 +19,10 @@
                   
                     </div>
                     <div class="button mt-2 d-flex flex-row align-items-center"> 
-                        <form method="POST" action=''>
+                        <form method="POST" action='{% url 'accept_invite' %}'>
                         {% csrf_token %}
-                        <input type="hidden" name="profile_pk" value="{{profile.pk}}" />
-                        <input type="submit" value="add to friends" class="btn btn-sm btn-primary w-100 ml-2" > 
+                        <input type="hidden" name="invite_pk" value="{{invite.pk}}" />
+                        <input type="submit" value="accept" class="btn btn-sm btn-primary w-100 ml-2" > 
 
                         </form>
 
