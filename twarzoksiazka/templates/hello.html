@@ -1,8 +1,11 @@
-{% extends "base.html" %}
+{% extends "main.html" %}
 
-{%block content%}
+{% block profile %}{% endblock profile %}
+{% block postkomlike %}{% endblock postkomlike %}
 
-<ul>
+{%block posty%}
+
+{% comment %} <ul>
     <li>
        <h1>{{obj.name}} {{obj.surr_name}}</h1> 
        
@@ -25,7 +28,37 @@
         </ol>
     </li>
 
-</ul>
+</ul> {% endcomment %}
+
+
+<div class="w3-row-padding">
+    <div class="w3-col m12">
+    <div class="w3-card w3-round w3-white">
+        <div class="w3-container w3-padding">
+        <h2 class="w3-opacity w3-size">{{obj.name}} {{obj.surr_name}}</h2>
+        <ul class='w3-ul'>
+            <li>
+                <img src="{{obj.profile_img.url}}" height="100" width="100"/>
+            </li>
+            <li>{{obj.get_friends_no}}</li>
+            <li>
+                <ol>
+                Friends:
+                {% for frend in obj.get_friends %}
+        
+                <li>{{frend.first_name}}
+                    {{frend.last_name}}
+        
+                </li>
+        
+                {% endfor %}
+                </ol>
+            </li>
+        </ul>
+        </div>
+    </div>
+    </div>
+</div>
 
   
 {% endblock %}

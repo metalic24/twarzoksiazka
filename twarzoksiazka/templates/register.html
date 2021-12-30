@@ -1,6 +1,10 @@
-{% extends "base.html" %}
+{% extends "main.html" %}
 
-{%block content%}
+
+{% block profile %}{% endblock profile %}
+{% block postkomlike %}{% endblock postkomlike %}
+
+{%block posty%}
 
 <form method="post">{% csrf_token %}
  
@@ -11,4 +15,6 @@
 
 
    {{form1.errors}}
+
+
 {% endblock %}

@@ -10,6 +10,7 @@ from django.contrib import messages
 # Create your views here.
 def post_com_upload(request):
     post_obj = Post.objects.all()
+    now_u = User_details.objects.all()
     
     profile = User_details.objects.get(user=request.user) 
     post_form = PostForm()
@@ -40,6 +41,7 @@ def post_com_upload(request):
         'profile': profile,
         'post_form': post_form,
         'com_form': com_form,
+        'now_u': now_u,
     }
     
     return render(request, 'posts/post_upload.html', context)
