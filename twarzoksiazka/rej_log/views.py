@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from .forms import  CreateUserDetailsForm, CreateUserForm, UpdateUserDetailsForm, User_details
-from .models import User_details, User
+from .models import Relationship, User_details, User
 from django.contrib.auth.hashers import make_password
 from django.db.models import Q
 from django.contrib.postgres.search import SearchVector
@@ -116,14 +116,35 @@ def update_user_details(request):
 def get_profiles(request):
         obj = User_details.objects.get(user = request.user)
         query = request.GET.get('query')
-        print(query)
+       
         profile_list = User_details.objects.filter(
             Q(name__icontains = query) | Q(surr_name__icontains = query)
-        )
-        print("lista",profile_list)
+        ).exclude(user= request.user)
+      
         context = {
             'profile_list': profile_list
         }
         return render(request, 'search.html', context)
 
+
+
+
+def add_friend(request):
+    if request.method == "POST":
+        pk = request.POST.get('profile_pk')
+        user = request.user
+        sender = User_details.objects.get(user=user)
+        reciver = User_details.objects.get(pk=pk)
+
+        rel = Relationship.objects.filter( (Q(sender = sender) & Q(reciver = reciver)) | (Q(sender = reciver) & Q(reciver = sender)) )
+
+        if rel == None:
+
+             relation = Relationship.objects.create(sender = sender, reciver = reciver, status = 'send')
+        
+
+        
+        return redirect(hello_login)
+
+    return redirect("viev_login")
 

@@ -18,7 +18,17 @@
                         <div class="d-flex flex-column"> <span class="followers">Followers</span> <span class="number2"></span> {{profile.get_friends_no}} </div>
                   
                     </div>
-                    <div class="button mt-2 d-flex flex-row align-items-center"> <button class="btn btn-sm btn-outline-primary w-100">Chat</button> <button class="btn btn-sm btn-primary w-100 ml-2">Follow</button> </div>
+                    <div class="button mt-2 d-flex flex-row align-items-center"> 
+                        <form method="POST" action='{% url 'add-friend' %}'>
+                        {% csrf_token %}
+                        <input type="hidden" name="profile_pk" value="{{profile.pk}}" />
+                        <input type="submit" value="add to friends" class="btn btn-sm btn-primary w-100 ml-2" > 
+
+                        </form>
+
+                        
+                        
+                    </div>
                 </div>
             </div>
         </div>
