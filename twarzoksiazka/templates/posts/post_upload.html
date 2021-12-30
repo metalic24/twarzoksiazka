@@ -9,9 +9,16 @@
 
     <p>
         {{obj.content}}
+
+        {% ifequal request.user obj.author.user %}
+        <a href="{% url 'posts:update-post' obj.pk %}"><button class="w3-btn">Update</button></a>
+        <a href="{% url 'posts:delete-post' obj.pk %}"><button class="w3-btn">Delete</button></a>
+        {% endifequal %}
+
         {% if obj.post_img %}
         <img src={{obj.post_img.url}}>
         {% endif %}
+
         <form action='{% url 'posts:like-post-view' %}' method='POST'>{% csrf_token %}
             <input type='hidden' name='post_id' value={{obj.id}}>
             <button type='submit' class='w3-btn w3-blue'>
