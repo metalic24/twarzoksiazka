@@ -76,10 +76,10 @@
                 <button type="submit" name='submit_com_form' class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button>
             </form>
 
-            {% ifequal request.user obj.author.user %}
+            {% if request.user == obj.author.user %}
             <a href="{% url 'posts:update-post' obj.pk %}"><button class="w3-button w3-theme-d1 w3-margin-bottom">Update</button></a>
             <a href="{% url 'posts:delete-post' obj.pk %}"><button class="w3-button w3-theme-d2 w3-margin-bottom">Delete</button></a>
-            {% endifequal %}
+            {% endif %}
         </div>
     {% endfor %}
 {% endblock postkomlike %}
