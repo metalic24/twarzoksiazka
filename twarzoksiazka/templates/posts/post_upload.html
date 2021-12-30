@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 
 {% block posty %}
-    <div class="w3-row-padding">
+    <div class="w3-row-padding w-75 p-3" >
         <div class="w3-col m12">
         <div class="w3-card w3-round w3-white">
             <div class="w3-container w3-padding">
@@ -20,7 +20,7 @@
 
 {% block postkomlike %}
     {% for obj in post_obj %}
-        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+        <div class="w3-container w3-card w3-white w3-round w3-margin w-75 p-3"><br>
             <img src="{{obj.author.profile_img.url}}" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
             <span class="w3-right w3-opacity">TO DO czas</span>
             <h4>{{obj.author.name}}</h4><br>
