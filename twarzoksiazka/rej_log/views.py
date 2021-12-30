@@ -128,6 +128,26 @@ def get_profiles(request):
 
 
 
+def show_infitations(request):
+     reciver = User_details.objects.get(user = request.user)
+     
+     rels = Relationship.objects.filter(reciver=reciver, status='send')
+
+     senders=[]
+
+     for rel in rels:
+         sender = User_details.objects.get(user = rel.sender.user)
+         senders.append(sender)
+
+     context ={
+        'rels':rels,
+        'senders':senders
+    }
+     return render(request, 'invitations.html', context)
+
+
+
+
 
 def add_friend(request):
     if request.method == "POST":
@@ -138,7 +158,8 @@ def add_friend(request):
 
         rel = Relationship.objects.filter( (Q(sender = sender) & Q(reciver = reciver)) | (Q(sender = reciver) & Q(reciver = sender)) )
 
-        if rel == None:
+        print(rel)
+        if not rel:
 
              relation = Relationship.objects.create(sender = sender, reciver = reciver, status = 'send')
         
