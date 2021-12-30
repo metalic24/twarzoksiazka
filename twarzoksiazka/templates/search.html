@@ -1,0 +1,11 @@
+{% extends 'main.html' %}
+
+{% block users %}
+<div class="container">
+    {% for profile in profile_list %}
+
+    <p> {{profile}} </p>
+    {% endfor %}
+
+</div>
+{% endblock users %}

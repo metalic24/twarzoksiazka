@@ -28,6 +28,16 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
       <a href="#" class="w3-bar-item w3-button">Jane likes your post</a>
     </div>
   </div>
+  <div>
+
+    <form class="d-flex" method="GET" action="{% url 'profile-search' %}">
+      <div class="input-group">
+          <span class="input-group-text" id="basic-addon1"></span>
+          <input type="text" class="form-control" placeholder="Wyszukaj" aria-label="Username" aria-describedby="basic-addon1" name='query' value="{{ request.GET.query }}">
+          <button style="border: none; background-color: transparent; box-shadow: none" type="submit"><i class="fas fa-search"></i></button>
+      </div>
+</form>
+  </div>
   <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
     <img src="/w3images/avatar2.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar">
   </a>
@@ -124,6 +134,9 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
       {% block posty %}
         replace
       {% endblock posty %}
+      {% block users%}
+
+      {% endblock %}
       
 {% comment %}       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
         <img src="/w3images/avatar2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
