@@ -2,11 +2,12 @@ from django.test import TestCase, SimpleTestCase
 from django.urls import reverse, resolve
 from rej_log.models import User, User_details
 from posts.models import Post, Comment, Like
+from mixer.backend.django import mixer
 
 # Create your tests here.
 
 
-class Rej_logPageTests(SimpleTestCase):
+class Rej_logPageTests(TestCase):
     
     
     def test_hello(self):
@@ -41,5 +42,12 @@ class Rej_logPageTests(SimpleTestCase):
         response = reverse('accept_invite')
         assert resolve(response).view_name == 'accept_invite'
         
+    def test_user_det(self):
+        details = mixer.blend('rej_log.User_details', bio='Jakis opis profilu', name='Jakub', surr_name='Matuszak')
+        assert details.bio == 'Jakis opis profilu' and details.name == 'Jakub' and details.surr_name == 'Matuszak'
+    
+    def test_friend(self):
+        friend = mixer.blend('rej_log.Relationship', status='friend')
+        assert friend.status == 'friend'
         
     
