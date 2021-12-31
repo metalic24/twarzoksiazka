@@ -7,7 +7,9 @@ from django.views.generic import UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='/rej_log/login/')
 # Create your views here.
 def post_com_upload(request):
   
@@ -60,6 +62,7 @@ def post_com_upload(request):
     
     return render(request, 'posts/post_upload.html', context)
 
+
 def like_unlike(request):
     user = request.user
     if request.method == 'POST':
@@ -91,7 +94,8 @@ class Delete_Post(DeleteView):
     model = Post
     template_name = 'posts/conf_del.html'
     success_url = reverse_lazy('posts:post-com-upload')
-    
+
+    @login_required(login_url='/rej_log/login/')
     def get_object(self, *args, **kwargs):
         pk = self.kwargs.get('pk')
         obj = Post.objects.get(pk=pk)
@@ -105,6 +109,7 @@ class Update_Post(UpdateView):
     success_url = reverse_lazy('posts:post-com-upload')
     model = Post
     
+    @login_required(login_url='/rej_log/login/')
     def form_valid(self, form):
         profile = User_details.objects.get(user=self.request.user)
         if form.instance.author == profile:

@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.shortcuts import redirect, render
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -87,6 +88,7 @@ def log_out(request):
     logout(request)
     return redirect(viev_login)
 
+@login_required(login_url='/rej_log/login/')
 #user profile viev
 def hello_login(request):
 
@@ -99,7 +101,7 @@ def hello_login(request):
 
 
     return render(request,"hello.html",context )
-
+@login_required(login_url='/rej_log/login/')
 def update_user_details(request):
     obj = User_details.objects.get(user = request.user)
     form = UpdateUserDetailsForm( request.POST or None, request.FILES or None ,instance=obj )
@@ -120,6 +122,7 @@ def update_user_details(request):
 
     return render(request,"update.html",context )
 
+@login_required(login_url='/rej_log/login/')
 def get_profiles(request):
         obj = User_details.objects.get(user = request.user)
         query = request.GET.get('query')
@@ -136,7 +139,7 @@ def get_profiles(request):
         return render(request, 'search.html', context)
 
 
-
+@login_required(login_url='/rej_log/login/')
 def show_infitations(request):
      reciver = User_details.objects.get(user = request.user)
      
@@ -162,7 +165,7 @@ def show_infitations(request):
 
 
 
-
+@login_required(login_url='/rej_log/login/')
 def add_friend(request):
     if request.method == "POST":
         pk = request.POST.get('profile_pk')
@@ -182,7 +185,7 @@ def add_friend(request):
         return redirect(hello_login)
 
     return redirect("viev_login")
-
+@login_required(login_url='/rej_log/login/')
 def accept_invite(request):
      if request.method == "POST":
         pk = request.POST.get('invite_pk')
