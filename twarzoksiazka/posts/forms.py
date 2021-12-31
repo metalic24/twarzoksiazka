@@ -4,7 +4,7 @@ from .models import Post, Comment
 
 
 class PostForm(forms.ModelForm):
-    content = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Co masz na twarzy?', 'rows': 3, 'cols': 80}))
+    content = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Co masz na twarzy?', 'rows': 3, 'cols': 60}))
     class Meta:
         model = Post
         fields = (

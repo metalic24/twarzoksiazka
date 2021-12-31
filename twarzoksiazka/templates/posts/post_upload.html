@@ -37,9 +37,9 @@
 
 {% block postkomlike %}
     {% for obj in post_obj %}
-        <div class="w3-container w3-card w3-white w3-round w3-margin w-75 p-3"><br>
+        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
             <img src="{{obj.author.profile_img.url}}" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-            <span class="w3-right w3-opacity">TO DO czas</span>
+            <span class="w3-right w3-opacity">{{obj.author.name}} - {{obj.created|timesince}} ago</span>
             <h4>{{obj.author.name}}</h4><br>
             <hr class="w3-clear">
             <p>{{obj.content}}</p>
@@ -64,10 +64,15 @@
             </form>
 
             {% if obj.comment_set.all %}
-            {% for c in obj.comment_set.all %}
-                <p>{{c.com_body}}</p>
+                {% for c in obj.comment_set.all %}
+                    <div class='w3-container w3-margin-top w3-margin-bottom'>
+                        <img src={{obj.author.profile_img.url}} class='w3-left w3-circle w3-margin-right' style="width:50px">
+                        <span class="w3-right w3-opacity">{{c.user.name}} - {{c.created|timesince}} ago</span>
+                        <span><h5>{{c.user.name}}</h5></span>
+                        <p>{{c.com_body}}</p>
+                    </div>
         
-            {% endfor %}
+                {% endfor %}
             {% endif %}
 
             <form action='' method='POST'>{% csrf_token %}

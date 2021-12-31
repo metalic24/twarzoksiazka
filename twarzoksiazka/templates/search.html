@@ -37,3 +37,22 @@
 
 </div>
 {% endblock posty %}
+
+{% block profile %}
+
+    <div class="w3-card w3-round w3-white">
+        <div class="w3-container">
+            {% for objct in now_u %}
+                {% if request.user == objct.user %}
+                    <h4 class="w3-center">{{objct.name}}</h4>        
+                    <p class="w3-center"><img src="{{objct.profile_img.url}}" class="w3-circle" style="height:106px;width:106px"></p>
+                    <hr>
+                    <p> {{objct.bio}}</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock profile %}
+
+{% block postkomlike %}{% endblock postkomlike %}

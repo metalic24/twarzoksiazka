@@ -116,13 +116,15 @@ def update_user_details(request):
 def get_profiles(request):
         obj = User_details.objects.get(user = request.user)
         query = request.GET.get('query')
+        now_u = User_details.objects.all()
        
         profile_list = User_details.objects.filter(
             Q(name__icontains = query) | Q(surr_name__icontains = query)
         ).exclude(user= request.user)
       
         context = {
-            'profile_list': profile_list
+            'profile_list': profile_list,
+            'now_u': now_u,
         }
         return render(request, 'search.html', context)
 
