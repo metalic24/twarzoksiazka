@@ -4,7 +4,7 @@ from .models import Post, Comment
 
 
 class PostForm(forms.ModelForm):
-    content = forms.CharField(label='Post content', widget=forms.Textarea())
+    content = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Co masz na twarzy?', 'rows': 3, 'cols': 80}))
     class Meta:
         model = Post
         fields = (
@@ -13,7 +13,7 @@ class PostForm(forms.ModelForm):
         )
         
 class CommentForm(forms.ModelForm):
-    com_body = forms.CharField(label='Comment', widget=forms.TextInput(attrs={'placeholder': 'Add comment'}))
+    com_body = forms.CharField(label='Comment ', widget=forms.TextInput(attrs={'placeholder': 'Add comment'}))
     class Meta:
         model = Comment
         fields = (

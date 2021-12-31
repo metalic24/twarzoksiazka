@@ -1,12 +1,15 @@
+from django.core.checks import messages
 from django.shortcuts import render, redirect
 from .models import Post, Like
 from .forms import PostForm, CommentForm
 from rej_log.models import User_details
+from django.views.generic import UpdateView, DeleteView
+from django.urls import reverse_lazy
+from django.contrib import messages
 
 # Create your views here.
 def post_com_upload(request):
     post_obj = Post.objects.all()
-    
     
     profile = User_details.objects.get(user=request.user) 
     post_form = PostForm()
@@ -66,3 +69,30 @@ def like_unlike(request):
             post_obj.save()
             like.save()
     return redirect('posts:post-com-upload')
+
+
+class Delete_Post(DeleteView):
+    model = Post
+    template_name = 'posts/conf_del.html'
+    success_url = reverse_lazy('posts:post-com-upload')
+    
+    def get_object(self, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        obj = Post.objects.get(pk=pk)
+        if not obj.author.user == self.request.user:
+            messages.warning(self.request, 'Nie jesteś autorem postu')
+        return obj
+    
+class Update_Post(UpdateView):
+    form_class = PostForm
+    template_name = 'posts/update.html'
+    success_url = reverse_lazy('posts:post-com-upload')
+    model = Post
+    
+    def form_valid(self, form):
+        profile = User_details.objects.get(user=self.request.user)
+        if form.instance.author == profile:
+            return super().form_valid(form)
+        else:
+            form.add_error(None, "Nie jesteś autorem postu")
+            return super().form_invalid(form)

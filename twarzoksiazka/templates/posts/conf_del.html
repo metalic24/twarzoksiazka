@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<h3>Delete Post</h3>
+
+{% if messages %}
+
+    {% for message in messages %}
+        {% if 'warning' in message.tags %}
+            {{message}}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+{% if not messages %}
+
+    <h3>Delete Post?</h3>
+    <form action="" method='POST'>{% csrf_token %}
+        <button type='submit' class='w3-btn'>Usuń</button>
+    </form>
+
+{% endif %}
+
+
+
+
+{% endblock content %}
+
+
+

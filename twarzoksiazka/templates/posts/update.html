@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h3>Update post</h3>
+    <form action="" method="POST" enctype="multipart/form">{% csrf_token %}
+        {{form}}
+        <button type='submit' class='w3-btn'>Update</button>
+
+
+    </form>
+
+{% endblock content %}
