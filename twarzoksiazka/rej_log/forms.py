@@ -26,6 +26,7 @@ class CreateUserForm(UserCreationForm):
 YEARS= [x for x in range(1940,2023)]
 
 class CreateUserDetailsForm(forms.ModelForm):
+    bio = forms.CharField(widget=forms.Textarea(attrs={'rows': 3, 'cols': 80}))
     class Meta:
         model = User_details
         fields = ['name', 'surr_name', 'birth_date', 'bio']

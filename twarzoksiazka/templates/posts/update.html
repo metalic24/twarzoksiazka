@@ -1,6 +1,27 @@
-{% extends 'base.html' %}
+{% extends 'main.html' %}
 
-{% block content %}
+{% block profile %}{% endblock profile %}
+
+{% block posty %}
+    <div class="w3-row-padding">
+        <div class="w3-col m12">
+        <div class="w3-card w3-round w3-white">
+            <div class="w3-container w3-padding">
+            <h2 class="w3-opacity">Update post</h2>
+                <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <p>{{form.content}}</p>
+                    <p>{{form.post_img}}</p>
+                    <button type="submit" class="w3-button w3-theme">Update</button> 
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock posty %}
+
+{% block postkomlike %}{% endblock postkomlike %}
+
+{% comment %} {% block content %}
 
     <h3>Update post</h3>
     <form action="" method="POST" enctype="multipart/form">{% csrf_token %}
@@ -10,4 +31,4 @@
 
     </form>
 
-{% endblock content %}
+{% endblock content %} {% endcomment %}

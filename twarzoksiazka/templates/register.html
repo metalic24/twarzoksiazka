@@ -1,8 +1,12 @@
-{% extends "base.html" %}
+{% extends "main.html" %}
 
-{%block content%}
 
-<form method="post">{% csrf_token %}
+{% block profile %}{% endblock profile %}
+{% block postkomlike %}{% endblock postkomlike %}
+
+{%block posty%}
+
+{% comment %} <form method="post">{% csrf_token %}
  
    {{ form1.as_p}}
    {{ form2.as_p}}
@@ -10,5 +14,36 @@
    <input type="submit" value="rejestracja ">
 
 
-   {{form1.errors}}
+   {{form1.errors}} {% endcomment %}
+   <div class="w3-row-padding">
+      <div class="w3-col m12">
+      <div class="w3-card w3-round w3-white">
+          <div class="w3-container w3-padding">
+          <h2 class="w3-opacity">Register</h2>
+              <form class='w3-container w3-col m4' action="" method="POST">{% csrf_token %}
+                  {{form1.email.label}}
+                  {{form1.email}}
+                  {{form1.password1.label}}
+                  {{form1.password1}}
+                  {{form1.password2.label}}
+                  {{form1.password2}}
+                  {{form2.name.label}}
+                  {{form2.name}}
+                  {{form2.surr_name.label}}
+                  {{form2.surr_name}}
+                  {{form2.birth_date.label}}
+                  <br>
+                  {{form2.birth_date}}
+                  <br>
+                  {{form2.bio.label}}
+                  {{form2.bio}}
+                  <button type="submit" class="w3-button w3-theme">Register</button> 
+              </form>
+          </div>
+      </div>
+      </div>
+  </div>
+  
+
+   
 {% endblock %}
