@@ -24,6 +24,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
   <a href="/rej_log/" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News">Register</a>
   <a href="{% url 'show_infitations' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="zaproszenia"><i class="fa fa-user"></i></a>
   <a href="/rej_log/hello" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages">Profil</a>
+  <a href="{% url 'log-out' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" > LOG OUT </a>
   <div>
 
     <form class="d-flex w-25 p-3" method="GET" action="{% url 'profile-search' %}">
@@ -33,7 +34,11 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
           <button style="border: none; background-color: transparent; box-shadow: none" type="submit"><i class="gg-search"></i></button>
       </div>
 </form>
+
   </div>
+  
+
+ 
  
     
   </div>

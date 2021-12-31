@@ -1,6 +1,9 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.shortcuts import redirect, render
+
+
+
 from .forms import  CreateUserDetailsForm, CreateUserForm, UpdateUserDetailsForm, User_details
 from .models import Relationship, User_details, User
 from django.contrib.auth.hashers import make_password
@@ -82,7 +85,7 @@ def viev_login(request):
 
 def log_out(request):
     logout(request)
-    return redirect(hello_login)
+    return redirect(viev_login)
 
 #user profile viev
 def hello_login(request):
@@ -188,5 +191,8 @@ def accept_invite(request):
         invite.status= 'accepted'
         invite.save()
      return redirect(hello_login)
+
+
+
 
     

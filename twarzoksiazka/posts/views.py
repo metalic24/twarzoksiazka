@@ -14,10 +14,19 @@ def post_com_upload(request):
     now_u = User_details.objects.all()
     
     profile = User_details.objects.get(user=request.user) 
-    profile_friends = User_details.objects.filter(friends__in = profile.get_friends())
+
+    profile_friends_users = profile.get_friends()
+    profile_friends = []
+    for p in profile_friends_users:
+        p = User_details.objects.get(user = p)
+
+        profile_friends.append(p)
+
+    print(profile_friends)
     
-    post_obj = Post.objects.filter(Q(author__in=profile_friends) | Q(author = profile)
+    post_obj = Post.objects.filter(Q(author__in=profile_friends)   | Q(author = profile)
     )
+    print(post_obj)
     post_form = PostForm()
     com_form = CommentForm()
     
