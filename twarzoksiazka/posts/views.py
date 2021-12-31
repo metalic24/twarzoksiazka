@@ -117,3 +117,28 @@ class Update_Post(UpdateView):
         else:
             form.add_error(None, "Nie jesteś autorem postu")
             return super().form_invalid(form)
+
+
+def user_profile(request, id):
+
+    now_u = User_details.objects.all()
+    
+    profile = User_details.objects.get(pk=id) 
+
+    
+    post_obj = Post.objects.filter(author = profile)
+    
+    
+    post_form = PostForm()
+    com_form = CommentForm()
+
+    context = {
+        'post_obj': post_obj,
+        'profile': profile,
+        'post_form': post_form,
+        'com_form': com_form,
+        'now_u': now_u,
+    }
+    
+    return render(request, 'posts/profile_viev.html', context)
+    
