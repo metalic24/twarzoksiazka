@@ -3,7 +3,7 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/profile_card.css' %}"/>
 {% endblock %}
-{% block users %}
+{% block posty %}
 <div class="container">
     {% for profile in profile_list %}
 
@@ -36,4 +36,4 @@
     {% endfor %}
 
 </div>
-{% endblock users %}
+{% endblock posty %}
