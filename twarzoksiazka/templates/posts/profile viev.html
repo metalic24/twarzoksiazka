@@ -6,7 +6,7 @@
         <div class="w3-container">
             {% for objct in now_u %}
                 {% if request.user == objct.user %}
-                    <h4 class="w3-center">{{objct.name}} {{obj.surr_name}}</h4>        
+                    <h4 class="w3-center">{{objct.name}}</h4>        
                     <p class="w3-center"><img src="{{objct.profile_img.url}}" class="w3-circle" style="height:106px;width:106px"></p>
                     <hr>
                     <p> {{objct.bio}}</p>
@@ -18,20 +18,7 @@
 {% endblock profile %}
 
 {% block posty %}
-    <div class="w3-row-padding w-75 p-3" >
-        <div class="w3-col m12">
-        <div class="w3-card w3-round w3-white">
-            <div class="w3-container w3-padding">
-            <h6 class="w3-opacity">Podziel się tym co masz na twarzy!</h6>
-                <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
-                    <p>{{post_form.content}}</p>
-                    <button type="submit" name='submit_post_form' class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button> 
-                    <button class='w3-theme'>{{post_form.post_img}}</button>
-                </form>
-            </div>
-        </div>
-        </div>
-    </div>
+
 {% endblock posty %}
 
 
@@ -40,7 +27,7 @@
         <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
             <img src="{{obj.author.profile_img.url}}" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
             <span class="w3-right w3-opacity">{{obj.author.name}} - {{obj.created|timesince}} ago</span>
-            <h4>{{obj.author.name}} {{obj.author.surr_name}}</h4><br>
+            <h4>{{obj.author.name}}</h4><br>
             <hr class="w3-clear">
             <p>{{obj.content}}</p>
             <div class="w3-row-padding" style="margin:0 -16px">
@@ -68,7 +55,7 @@
                     <div class='w3-container w3-margin-top w3-margin-bottom'>
                         <img src={{obj.author.profile_img.url}} class='w3-left w3-circle w3-margin-right' style="width:50px">
                         <span class="w3-right w3-opacity">{{c.user.name}} - {{c.created|timesince}} ago</span>
-                        <span><h5>{{c.user.name}} {{c.user.surr_name}}</h5></span>
+                        <span><h5>{{c.user.name}}</h5></span>
                         <p>{{c.com_body}}</p>
                     </div>
         

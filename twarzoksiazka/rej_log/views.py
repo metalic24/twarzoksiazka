@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from .forms import  CreateUserDetailsForm, CreateUserForm, UpdateUserDetailsForm, User_details
@@ -79,6 +79,10 @@ def viev_login(request):
 
 
     return  render(request,"login.html",context)
+
+def log_out(request):
+    logout(request)
+    return redirect(hello_login)
 
 #user profile viev
 def hello_login(request):

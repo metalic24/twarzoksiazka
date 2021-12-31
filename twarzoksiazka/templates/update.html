@@ -1,11 +1,38 @@
-{% extends "base.html" %}
+{% extends "main.html" %}
 
-{%block content%}
+{% block profile %}{% endblock profile %}
+{% block postkomlike %}{% endblock postkomlike %}
+{%block posty %}
 
-<form method="POST" encypte = "multipart/form-data">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit"/>
-</form>
+{% comment %} <form method="post">{% csrf_token %}
+
+    <input type="text" name="username"/>
+    <input type="password"  name="password"/>
+  
+<input type="submit" value="logowanie ">
+
+{% for message in messages%}
+<p id="">{{message}}</p>
+{% endfor %} {% endcomment %}
+
+<div class="w3-row-padding">
+    <div class="w3-col m12">
+    <div class="w3-card w3-round w3-white">
+        <div class="w3-container w3-padding">
+        <h2 class="w3-opacity">Update profile</h2>
+            <form action="" method="POST">{% csrf_token %}
+               {{form.as_p}}
+                {% for message in messages%}
+                    <p id="">{{message}}</p>
+                {% endfor %}
+                <button type="submit" class="w3-button w3-theme">Update</button> 
+            </form>
+        </div>
+    </div>
+    </div>
+</div>
+
+
+
   
 {% endblock %}
