@@ -15,6 +15,7 @@
         </div>
     </div>
 
+
 {% endblock profile %}
 
 {% block posty %}
@@ -38,7 +39,8 @@
 {% block postkomlike %}
     {% for obj in post_obj %}
         <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-            <img src="{{obj.author.profile_img.url}}" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+            <a href="/profile/{{obj.author.pk}}" style="text-decoration: none; color:black;">
+            <img src="{{obj.author.profile_img.url}}" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px"></a>
             <span class="w3-right w3-opacity">{{obj.author.name}} - {{obj.created|timesince}} ago</span>
             <h4>{{obj.author.name}} {{obj.author.surr_name}}</h4><br>
             <hr class="w3-clear">
