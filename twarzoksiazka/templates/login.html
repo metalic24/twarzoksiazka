@@ -28,13 +28,9 @@
                 {% for message in messages%}
                     <p id="">{{message}}</p>
                 {% endfor %}
-                <button type="submit" class="w3-button w3-theme">Login</button> 
+                <button type="submit" class="w3-button w3-theme w3-margin-bottom">Login</button> 
             </form>
-            <form action="" method="POST">
-                {% csrf_token %}
-                <input type="email"/>
-                <input type="submit" value="przypomnij e-mail"/>
-            </form>
+            <a href="/rej_log/reset_password"><button class="w3-button w3-theme">Zapomniałeś hasła?</button></a>
         </div>
     </div>
     </div>
