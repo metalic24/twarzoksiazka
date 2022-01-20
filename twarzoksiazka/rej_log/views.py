@@ -106,6 +106,7 @@ def update_user_details(request):
     obj = User_details.objects.get(user = request.user)
     form = UpdateUserDetailsForm( request.POST or None, request.FILES or None ,instance=obj )
 
+
     if request.method == 'POST':
         if form.is_valid():
             form.save()
@@ -195,6 +196,9 @@ def accept_invite(request):
         invite.save()
      return redirect(hello_login)
 
+def rem(request):
+
+    return redirect(hello_login)
 
 
 

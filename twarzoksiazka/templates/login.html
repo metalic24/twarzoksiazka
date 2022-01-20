@@ -30,6 +30,11 @@
                 {% endfor %}
                 <button type="submit" class="w3-button w3-theme">Login</button> 
             </form>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input type="email"/>
+                <input type="submit" value="przypomnij e-mail"/>
+            </form>
         </div>
     </div>
     </div>
