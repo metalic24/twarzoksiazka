@@ -83,7 +83,8 @@ def viev_login(request):
 
 
     return  render(request,"login.html",context)
-
+    
+@login_required(login_url='/rej_log/login/')
 def log_out(request):
     logout(request)
     return redirect(viev_login)
